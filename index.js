@@ -1,17 +1,19 @@
+require('dotenv').config(); // Load .env variables at the very top
+
 const express = require('express');
 const cors = require('cors');
 const urlRoute = require('./routes/url');
 const { connect } = require('./connect');
 const app = express();
 const UrlModel = require('./models/url');
-const port = 8001;
+const port = process.env.PORT || 8001;  // Use PORT from .env or fallback
 
-connect('mongodb://localhost:27017/url-shortener')
-  .then(() => console.log('Connected to MongoDB')
-);
+// Use MONGO_URI from .env instead of localhost
+connect(process.env.MONGO_URI)
+  .then(() => console.log('Connected to MongoDB Atlas'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 app.use(cors()); // allow all origins for testing
-
 app.use(express.json());
 
 app.use("/url", urlRoute);
