@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Analytics from "./Analytics";
 
-const backendBaseURL = "http://localhost:8001/";
+const backendBaseURL = "https://codealpha-urlshortner.onrender.com/";
+
 
 function UrlShortener() {
   const [originalUrl, setOriginalUrl] = useState("");
@@ -21,7 +22,8 @@ function UrlShortener() {
     }
 
     try {
-      const response = await fetch("/url", {
+      const response = await fetch(`${backendBaseURL}url`, 
+         {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url }),

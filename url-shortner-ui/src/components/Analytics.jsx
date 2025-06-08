@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-const backendBaseURL = "http://localhost:8001";
+const backendBaseURL = "https://codealpha-urlshortner.onrender.com";
+
 
 function Analytics({ id, onClose }) {
   const [analyticsData, setAnalyticsData] = useState(null);
