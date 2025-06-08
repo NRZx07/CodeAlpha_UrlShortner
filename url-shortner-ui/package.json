@@ -2,7 +2,7 @@
   "name": "url-shortner-ui",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://NRZx07.github.io/CodeAlpha_Urlshortner",
+  "homepage": "https://NRZx07.github.io/CodeAlpha_UrlShortner",
   "proxy": "http://localhost:8001",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",

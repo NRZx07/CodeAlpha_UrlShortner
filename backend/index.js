@@ -8,11 +8,6 @@ const app = express();
 const UrlModel = require('./models/url');
 const port = process.env.PORT || 8001;  // Use PORT from .env or fallback
 
-// Use MONGO_URI from .env instead of localhost
-connect(process.env.MONGO_URI)
-  .then(() => console.log('Connected to MongoDB Atlas'))
-  .catch(err => console.error('MongoDB connection error:', err));
-
 app.use(cors()); // allow all origins for testing
 app.use(express.json());
 
@@ -38,6 +33,16 @@ app.get("/:shortId", async (req, res) => {
   res.redirect(entry.redirectURL);
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+// Connect to MongoDB, then start the server
+connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log('Connected to MongoDB Atlas');
+
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+  })
+  .catch(err => {
+    console.error('MongoDB connection error:', err);
+    process.exit(1); // exit if DB connection fails
+  });
